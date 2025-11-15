@@ -1,0 +1,221 @@
+:root {
+  --bg: #faf8ef;
+  --board: #bbada0;
+  --cell: #cdc1b4;
+  --tile-size: 22vmin;
+  --gap: 2vmin;
+}
+
+html, body {
+  height: 100%;
+  margin: 0 auto;    
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: #333;
+}
+
+.app {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 18px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  z-index: 100; 
+}
+
+button {
+  background: #eee;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 100; 
+}
+
+.score-box {
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 0 rgba(0,0,0,.05);
+}
+
+.game-wrap {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.board-wrap {
+  position: relative;
+  margin: 0 auto;     
+}
+
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: var(--gap);
+  width: calc(4 * var(--tile-size) + 3 * var(--gap));
+  height: calc(4 * var(--tile-size) + 3 * var(--gap));
+  position: relative;
+  border-radius: 10px;
+  background: var(--board);
+  padding: 0; 
+  
+}
+
+.board::before {
+  content: '';
+  position: absolute;
+  top: -5px;   
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 10px solid #bbada0; 
+  border-radius: 12px;         
+  pointer-events: none;       
+  z-index: 100;              
+}
+
+.cell {
+  background: var(--cell);
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+}
+
+.tile-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.tile {
+  width: calc((100% - 3 * var(--gap)) / 4);
+  height: calc((100% - 3 * var(--gap)) / 4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 2.2rem;
+  position: absolute;
+  transition: transform 150ms ease, opacity 150ms ease;
+}
+
+
+.tile.new,
+.tile.merge {
+  animation: pop 160ms ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(.2); }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+
+.tile[data-value="2"] { background: #eee4da; color: #776e65; }
+.tile[data-value="4"] { background: #ede0c8; color: #776e65; }
+.tile[data-value="8"] { background: #f2b179; color: #f9f6f2; }
+.tile[data-value="16"] { background: #f59563; color: #f9f6f2; }
+.tile[data-value="32"] { background: #f67c5f; color: #f9f6f2; }
+.tile[data-value="64"] { background: #f65e3b; color: #f9f6f2; }
+.tile[data-value="128"] { background: #edcf72; color: #f9f6f2; font-size: 1.6rem; }
+.tile[data-value="256"] { background: #edcc61; color: #f9f6f2; font-size: 1.6rem; }
+.tile[data-value="512"] { background: #edc850; color: #f9f6f2; font-size: 1.4rem; }
+.tile[data-value="1024"] { background: #edc53f; color: #f9f6f2; font-size: 1.2rem; }
+.tile[data-value="2048"] { background: #edc22e; color: #f9f6f2; font-size: 1.1rem; }
+.tile[data-value="4096"] { background: #3c3a32; color: #fff; }
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  background: #fff;
+  padding: 18px;
+  border-radius: 8px;
+  max-width: 480px;
+  width: 100%;
+}
+
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard th, .leaderboard td {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.mobile-controls {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  z-index: 100; 
+}
+
+.dir-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+}
+
+@media (max-width: 700px) {
+  :root { --tile-size: 18vmin; --gap: 2vmin; }
+  .app { padding: 12px; }
+}
+
+@media (max-width: 420px) {
+  :root { --tile-size: 20vmin; --gap: 2vmin; }
+  .controls { flex-wrap: wrap; }
+}
+
+.hidden { display: none; }
+.muted { color: #666; font-size: .9rem; }
+.modal-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}

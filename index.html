@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>2048 — Плиточки</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>2048 — Плиточки</h1>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="score-box"><div>Счёт</div><div id="score">0</div></div>
+        <div class="controls">
+          <button id="undoBtn">Отмена хода</button>
+          <button id="restartBtn">Начать заново</button>
+          <button id="leaderBtn">Таблица лидеров</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="game-wrap">
+      <div class="board-wrap">
+        <div class="board" id="board"></div>
+        <div class="tile-layer" id="tileLayer"></div>
+        <div id="gameOverOverlay" class="modal hidden">
+          <div id="gameOverMsg">Игра окончена</div>
+          <div id="saveRow">
+            <input id="playerName" placeholder="Введите имя" />
+            <button id="saveScoreBtn">Сохранить результат</button>
+          </div>
+          <div id="savedMsg" class="hidden">Ваш рекорд сохранён.</div>
+          <button id="restartAfterGame">Начать заново</button>
+        </div>
+      </div>
+      <aside>
+        <div class="muted">Управление:</div>
+        <ul>
+          <li>Десктоп — стрелки</li>
+          <li>Мобильные — кнопки ниже</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="mobile-controls" id="mobileControls">
+      <div class="dir-btn" data-dir="up">▲</div>
+      <div class="dir-btn" data-dir="left">◀</div>
+      <div class="dir-btn" data-dir="down">▼</div>
+      <div class="dir-btn" data-dir="right">▶</div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="leaderBackdrop">
+      <div class="modal leaderboard">
+        <h3>Топ-10 рекордов</h3>
+        <table id="leaderTable">
+          <thead><tr><th>#</th><th>Имя</th><th>Очки</th><th>Дата</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="modal-buttons">
+          <button id="closeLeader">Закрыть</button>
+          <button id="clearLeader">Очистить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
