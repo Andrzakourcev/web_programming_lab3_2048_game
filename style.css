@@ -127,7 +127,7 @@ button {
 
 .tile.new,
 .tile.merge {
-  animation: pop 160ms ease;
+  animation: pop 260ms ease;
 }
 
 @keyframes pop {
